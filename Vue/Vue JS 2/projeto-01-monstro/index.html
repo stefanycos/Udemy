@@ -12,34 +12,35 @@
         <div class="panel scores">
             <div class="player">
                 <p>Jogador</p>
-                <div class="progress-bar-player">
-                    <div class="progress-player" :style="{width}"></div>
+                <div class="progress-bar-player" :class="progress_bar_player_class">
+                    <div class="progress-player"></div>
                 </div>
                 <p class="points">{{ playerPoints }}%</p>
             </div>
 
             <div class="monster">
                 <p>Monstro</p>
-                <div class="progress-bar-monster">
-                    <div class="progress-monster" :style="{width}"></div>
+                <div class="progress-bar-monster" :class="progress_bar_monster_class">
+                    <div class="progress-monster"></div>
                 </div>
                 <p class="points">{{ monsterPoints }}%</p>
             </div>
         </div>
-        <div v-show="!novoJogo" class="panel result">
+
+        <div v-show="result" class="panel result">
             
         </div>
 
         <div class="panel buttons">
-            <button v-show="!novoJogo">ATAQUE</button>
-            <button v-show="!novoJogo">ATAQUE ESPECIAL</button>
+            <button v-show="!novoJogo" @click="attack">ATAQUE</button>
+            <button v-show="!novoJogo" @click="specialAttack">ATAQUE ESPECIAL</button>
             <button v-show="!novoJogo">CURAR</button>
             <button v-show="!novoJogo" @click="desistir">DESISTIR</button>
             <button v-show="novoJogo" @click="iniciarNovoJogo">INICIAR NOVO JOGO</button>
         </div>
 
         <div v-show="!novoJogo" class="panel logs">
-            
+            <p class="list-logs" :class="log.cssClass" v-for="log in logs">{{ log.text }}</p>
         </div>
     </div>
     <script src="app.js"></script>

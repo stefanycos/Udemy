@@ -23,8 +23,7 @@ html {
 }
 
 .progress-player {
-	background-color: green;
-    height: 100%;
+	height: 100%;
 }
 
 .progress-bar-monster {
@@ -35,8 +34,7 @@ html {
 }
 
 .progress-monster {
-	background-color: green;
-    height: 100%;
+	height: 100%;
 }
 
 .player {
@@ -47,4 +45,31 @@ html {
     float: right;
 }
 
+.winning {
+    background-color: green;
+}
+
+.losing {
+    background-color: red;
+}
+
+.zero {
+   background-color: white; 
+}
+
 /* Painel buttons */
+
+/* Painel log */
+.list-logs {
+    color: white;
+    align-content: center;
+    display: flex;
+}
+
+.log-monster {
+    background-color: crimson;
+}
+
+.log-player {
+    background-color: blueviolet;
+}
