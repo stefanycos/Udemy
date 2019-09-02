@@ -4,85 +4,132 @@ new Vue({
     data: {
         playerPoints: 100,
         monsterPoints: 100,
-
-        progress_bar_player_class: 'winning',
-        progress_bar_monster_class: 'winning',
         
+        colorPlayer: 'green',
+        colorMonster: 'green',
+
         log_class: '',
         logs: [],
+        showLogPanel: false,
         
         novoJogo: true,
         
         result: false,
-        resultMessage: ''
+        resultMessage: '',
+        resultMessageStyle: 'black',
+        
+        progressBarPlayer: '',
+        newProgressBarPlayer: 100,
+
+        progressBarMonster: '',
+        newProgressBarMonster: 100
     },
 
     methods: {
         
         attack(){
-            if (this.playerPoints == 0 || this.monsterPoints == 0) {
-                return;
-            }
+            this.showLogPanel = true;
+            monsterAttackValue = this.getRandomNumber(11);
+            playerAttackValue = this.getRandomNumber(9);
 
-            monsterAttackValue = this.getRandomNumber();
-            playerAttackValue = this.getRandomNumber();
-
-            this.playerPoints -= playerAttackValue;
-            this.monsterPoints -= monsterAttackValue;
-
-            this.logs.push({text: 'JOGADOR ATINGIU MONSTRO COM ' + playerAttackValue, cssClass: 'log-player'});
-            this.logs.push({text: 'MONSTRO ATINGIU JOGADOR COM ' + monsterAttackValue, cssClass: 'log-monster'});
+            this.pointsCalculation(monsterAttackValue, playerAttackValue);
+            this.logMessage(monsterAttackValue, playerAttackValue);
         },
 
         specialAttack(){
-            attackValue = Math.floor(Math.random() * 11);
-            this.logs.push({text: 'MONSTRO ATINGIU MONSTRON COM ' + attackValue, cssClass: 'log-monster'});
+            this.showLogPanel = true;
+            monsterAttackValue = this.getRandomNumber(9);
+            playerAttackValue = this.getRandomNumber(11);
+
+            this.pointsCalculation(monsterAttackValue, playerAttackValue);
+            this.logMessage(monsterAttackValue, playerAttackValue);  
         },
 
         heal(){
+            this.showLogPanel = true;
+            monsterAttackValue = this.getRandomNumber(8);
+            playerAttackValue = this.getRandomNumber(11);
 
-        },
-        
-        iniciarNovoJogo() {
-            this.playerPoints = 100,
-            this.monsterPoints = 100,
-            this.novoJogo = false
-        },
-
-        desistir() {
-            this.playerPoints = 100,
-            this.monsterPoints = 100,
-            this.novoJogo = true
+            this.pointsCalculation(monsterAttackValue, playerAttackValue);
+            this.logMessage(monsterAttackValue, playerAttackValue);  
         },
 
-        getRandomNumber(){
-            return Math.floor(Math.random() * 11);
+        pointsCalculation(monsterPoints, playerAttackPoints){
+            this.playerPoints -= playerAttackPoints;
+            this.monsterPoints -= monsterPoints;
+            
+            this.newProgressBarPlayer -= playerAttackPoints;
+            this.progressBarPlayer = this.newProgressBarPlayer + '%';
+
+            this.newProgressBarMonster -= monsterPoints;
+            this.progressBarMonster = this.newProgressBarMonster + '%';
+        },
+
+        logMessage(monsterPoints, playerAttackPoints){
+            this.logs.push({text: 'JOGADOR ATINGIU MONSTRO COM ' + playerAttackPoints, cssClass: 'log-player'});
+            this.logs.push({text: 'MONSTRO ATINGIU JOGADOR COM ' + monsterPoints, cssClass: 'log-monster'});
+        },
+
+        newGame() {
+            this.clearValues();
+            this.novoJogo = false;
+        },
+
+        quit() {
+            this.clearValues();
+            this.novoJogo = true;
+        },
+
+        clearValues(){
+            this.playerPoints = 100;
+            this.monsterPoints = 100;
+            this.logs = [];
+            this.colorPlayer = 'green';
+            this.colorMonster = 'green';
+            this.progressBarPlayer = '';
+            this.newProgressBarPlayer = 100;
+            this.progressBarMonster = '';
+            this.newProgressBarMonster = 100;
+            this.showLogPanel = false;
+            this.resultMessage = '';
+            this.result = false;
+        },
+
+        getRandomNumber(limit){
+            return Math.floor(Math.random() * limit);
         }
     },
 
     watch: {
         playerPoints(){
             if(this.playerPoints > 20) {
-                this.progress_bar_player_class = 'winning';
+                this.colorPlayer = 'green';
             } else if (this.playerPoints <= 0) {
-                this.progress_bar_player_class = 'zero';
+                this.colorPlayer = 'white';
                 this.result = true;
                 this.resultMessage = 'Você perdeu! :(';
+                this.playerPoints = 0;
+                this.novoJogo = true;
+                this.resultMessageStyle = 'red';
             } else {
-                this.progress_bar_player_class = 'losing';
+                this.colorPlayer = 'red';
             }
         },
 
         monsterPoints(){
             if(this.monsterPoints > 20) {
-                this.progress_bar_monster_class = 'winning';
+                this.colorMonster = 'green';
             } else if (this.monsterPoints <= 0) {
-                this.progress_bar_monster_class = 'zero';
+                this.colorMonster = 'white';
                 this.result = true;
                 this.resultMessage = 'Você ganhou! :)';
+                this.monsterPoints = 0;
+                this.novoJogo = true;
+                this.resultMessageStyle = 'green';
             } else {
-                this.progress_bar_monster_class = 'losing';
+                this.colorMonster = 'red';
             }
+            
         }
     }
 

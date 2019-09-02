@@ -23,7 +23,7 @@ html {
 }
 
 .progress-player {
-	height: 100%;
+    height: 100%;
 }
 
 .progress-bar-monster {
@@ -45,19 +45,52 @@ html {
     float: right;
 }
 
-.winning {
-    background-color: green;
-}
-
-.losing {
-    background-color: red;
-}
-
-.zero {
-   background-color: white; 
+.score-text {
+    text-align: center;
 }
 
 /* Painel buttons */
+.buttons {
+    text-align: center;
+}
+
+.button-new-game {
+    background-color: lightseagreen;
+    color: white;
+    padding: 6px 6px 6px 6px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.button-attack {
+    background-color: #ff1a1a;
+    color: white;
+    padding: 6px 6px 6px 6px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.button-special-attack {
+    background-color: #ffff4d;
+    padding: 6px 6px 6px 6px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.button-heal {
+    background-color: #00802b;
+    color: white;
+    padding: 6px 6px 6px 6px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.button-quit {
+    background-color: #85adad;
+    padding: 6px 6px 6px 6px;
+    border-radius: 4px;
+    font-weight: bold;
+}
 
 /* Painel log */
 .list-logs {
@@ -72,4 +105,10 @@ html {
 
 .log-player {
     background-color: blueviolet;
+}
+
+/* Panel result */
+.panel-result {
+    text-align: center;
+    font-weight: bold;
 }
