@@ -1,0 +1,29 @@
+Comandos:
+	* npm i - instala as dependencias necessarias
+		** dentro da pasta projeto
+	* npm start - inicia a aplicação
+	* npm i -s graphql-import
+		** dependencia utilizada para importação de arquivos do tipo graphql
+
+Componentes:
+	* ApolloServer - cria uma ferramenta , chamada playground, para consultar as queries, quando em produção a variavel node environment muda para production e o ApolloServer é desabilitado por padrão.
+
+Para saber mais
+	* Atraves da configuração abaixo é possível iniciar o projeto com npm start, e o paramêtro --ext js,graphql é para habilitar o live reload de arquivos com extensão js e graphql
+		"scripts": {
+			"start": "nodemon --ext js,graphql"
+		 },
+		 
+
+Queries utilizadas
+	* Exemplo de Fragment: 
+		fragment usuarioCompleto on Usuario {
+		  id nome idade email salario vip email status
+		  perfil { id nome}
+		}
+
+		{
+			usuario(id:  2){
+				...usuarioCompleto
+			}
+		}
