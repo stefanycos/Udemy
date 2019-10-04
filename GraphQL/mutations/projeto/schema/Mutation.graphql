@@ -1,0 +1,16 @@
+# Pontos de entrada da sua API - Alteração de dados
+type Mutation {
+    # Virgula Opcional
+    # novoUsuario(nome: String, email: String, idade: Int): Usuario! OU usando input como no exemplo abaixo
+    novoUsuario(dados: UsuarioInput!): Usuario!
+
+    #excluirUsuario(id: Int): Usuario OU usando input como no exemplo abaixo
+    excluirUsuario(filtro: UsuarioFiltro): Usuario
+
+    alterarUsuario(
+        id: Int!
+        nome: String
+        email: String
+        idade: Int
+    ): Usuario!
+}
